@@ -10,12 +10,13 @@ import { execQuery } from 'rest-query';
 document.querySelector('.exec-button').addEventListener('click', onExecClick);
 
 function onExecClick() {
-   execQuery(
-      `select data.breed, data.origin, data.coat, data.pattern
-      from breeds
-      where limit = 20 and page = 2`,
-      { breeds: 'https://catfact.ninja/breeds' }
-   ).then(data => console.table(data));
+   const query = flask.getCode();
+   execQuery(query, { breeds: 'https://catfact.ninja/breeds' })
+      .then(data => renderData(data));
+}
+
+function renderData(data) {
+   console.table(data);
 }
 
 const flask = new CodeFlask('.query-editor', {
@@ -24,3 +25,7 @@ const flask = new CodeFlask('.query-editor', {
 });
 
 flask.addLanguage('sql', Prism.languages['sql']);
+
+flask.updateCode(`select data.breed, data.origin, data.coat, data.pattern
+from breeds
+where limit = 20 and page = 2`);
