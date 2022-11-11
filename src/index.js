@@ -3,9 +3,13 @@ import './styles.scss';
 import CodeFlask from 'codeflask';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-sql';
+import Handlebars from 'handlebars/dist/handlebars';
 
 import { execQuery } from 'rest-query';
 
+
+const templateSrc = document.querySelector('#results-template').innerHTML;
+const template = Handlebars.compile(templateSrc);
 
 document.querySelector('.exec-button').addEventListener('click', onExecClick);
 
@@ -16,7 +20,9 @@ function onExecClick() {
 }
 
 function renderData(data) {
-   console.table(data);
+   const results = document.querySelector('.results');
+   const row = Array.isArray(data) ? data[0] : data;
+   results.innerHTML = template({data: data, col: Object.keys(row)});
 }
 
 const flask = new CodeFlask('.query-editor', {

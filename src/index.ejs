@@ -15,6 +15,27 @@
             <div class="query-editor border"></div>
          </div>
       </div>
+      <div class="results"></div>
    </div>
+   <script id="results-template" type="text/x-handlebars-template">
+      <table class="table table-striped">
+         <thead>
+            <tr>
+            {{#each col}}
+               <th>{{this}}</th>
+            {{/each}}
+            </tr>
+         </thead>
+         <tbody>
+         {{#each data}}
+            <tr>
+               {{#each ../col}}
+               <td>{{lookup ../this this}}</td>
+               {{/each}}
+            </tr>
+         {{/each}}
+         </tbody>
+      </table>
+   </script>
 </body>
 </html>
