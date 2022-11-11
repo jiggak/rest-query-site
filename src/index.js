@@ -21,7 +21,17 @@ function onExecClick() {
 
 function renderData(data) {
    const results = document.querySelector('.results');
-   const row = Array.isArray(data) ? data[0] : data;
+
+   let row;
+   if (Array.isArray(data)) {
+      row = data[0];
+   } else {
+      row = data;
+      data = [data];
+   }
+
+   console.table(data);
+
    results.innerHTML = template({data: data, col: Object.keys(row)});
 }
 
