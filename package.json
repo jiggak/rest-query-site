@@ -7,7 +7,7 @@
     "start": "webpack serve --mode=development"
   },
   "author": "josh@slashdev.ca",
-  "license": "ISC",
+  "license": "Beerware",
   "dependencies": {
     "bootstrap": "^5.2.2",
     "codeflask": "^1.4.1",

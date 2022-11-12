@@ -15,7 +15,7 @@ document.querySelector('.exec-button').addEventListener('click', onExecClick);
 
 function onExecClick() {
    const query = flask.getCode();
-   execQuery(query, { breeds: 'https://catfact.ninja/breeds' })
+   execQuery(query)
       .then(data => renderData(data));
 }
 
@@ -43,5 +43,5 @@ const flask = new CodeFlask('.query-editor', {
 flask.addLanguage('sql', Prism.languages['sql']);
 
 flask.updateCode(`select data.breed, data.origin, data.coat, data.pattern
-from breeds
+from https://catfact.ninja/breeds
 where limit = 20 and page = 2`);
